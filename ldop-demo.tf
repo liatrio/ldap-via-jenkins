@@ -92,6 +92,8 @@ resource "aws_instance" "ldop_demo_env" {
     }
 
     inline = [
+      "export INITIAL_ADMIN_USER=\"test\"",
+      "export INITIAL_ADMIN_PASSWORD_PLAIN=\"test\"",
       "cd ~/ldop-docker-compose",
       "sudo ./ldop compose init",
     ]
