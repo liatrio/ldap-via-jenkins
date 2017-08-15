@@ -9,6 +9,9 @@ ssh-keygen -t rsa -N "" -f $workspace/terraform.key
 # initialize the workspace
 terraform init -input=false
 
+export INITIAL_ADMIN_USER="test"
+export INITIAL_ADMIN_PASSWORD_PLAIN="test"
+
 # initialize the instance
 terraform apply $workspace
 
