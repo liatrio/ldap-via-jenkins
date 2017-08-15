@@ -83,16 +83,6 @@ resource "aws_instance" "ldop_demo_env" {
     ]
   }
 
-  # Copy new docker-compose file
-  provisioner "file" {
-    connection {
-      user        = "ec2-user"
-      private_key = "${file("${path.module}/terraform.key")}"
-    }
-
-    source      = "${path.module}/../../docker-compose.yml"
-    destination = "~/ldop-docker-compose/docker-compose.yml"
-  }
 
    # start ldop
    provisioner "remote-exec" {
