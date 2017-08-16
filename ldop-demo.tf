@@ -103,7 +103,7 @@ resource "aws_instance" "ldop_demo_env" {
    provisioner "remote-exec" {
     connection {
       user        = "ec2-user"
-      private_key = "${file("")}"
+      private_key = "${file("~/.ssj/id_rsa")}"
     }
 
     inline = [
