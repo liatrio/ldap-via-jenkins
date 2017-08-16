@@ -1,4 +1,4 @@
-job('create-ldop-instance') {
+job('destroy-ldop-instance') {
   scm {
     github('liatrio/ldop-via-jenkins', 'master')
   }

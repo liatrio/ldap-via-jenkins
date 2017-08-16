@@ -43,7 +43,7 @@ resource "aws_security_group" "demo_env" {
 
 resource "aws_key_pair" "demo_key" {
   key_name = "terraform-ldop-demo"
-  public_key = "${file("${path.module}/terraform.key.pub")}"
+  public_key = "${file("~/.ssh/id_rsa.pub")}"
 }
 
 resource "aws_instance" "ldop_demo_env" {
@@ -53,7 +53,7 @@ resource "aws_instance" "ldop_demo_env" {
   vpc_security_group_ids = ["${aws_security_group.demo_env.id}"]
 
   tags = {
-    Name = "terraform_ldop_demo"
+    Name = "terraform-ldop-demo"
   }
 
   root_block_device {
@@ -64,7 +64,7 @@ resource "aws_instance" "ldop_demo_env" {
   provisioner "remote-exec" {
     connection {
       user        = "ec2-user"
-      private_key = "${file("${path.module}/terraform.key")}"
+      private_key = "${file("~/.ssh/id_rsa")}"
     }
 
     inline = [
@@ -81,7 +81,7 @@ resource "aws_instance" "ldop_demo_env" {
   provisioner "remote-exec" {
     connection {
       user        = "ec2-user"
-      private_key = "${file("${path.module}/terraform.key")}"
+      private_key = "${file("~/.ssh/id_rsa")}"
     }
 
     inline = [
@@ -95,7 +95,7 @@ resource "aws_instance" "ldop_demo_env" {
    provisioner "remote-exec" {
     connection {
       user        = "ec2-user"
-      private_key = "${file("${path.module}/terraform.key")}"
+      private_key = "${file("~/.ssh/id_rsa")}"
     }
 
     inline = [
