@@ -1,3 +1,11 @@
+terraform {
+  backend "s3" {
+    bucket = "ldop-demo-tfstates"
+    key = "ldop-demo/demo-terraform.tfstate"
+    region = "us-west-2"
+  }
+}
+
 data "terraform_remote_state" "network" {
   backend = "s3"
   config {
@@ -95,7 +103,7 @@ resource "aws_instance" "ldop_demo_env" {
    provisioner "remote-exec" {
     connection {
       user        = "ec2-user"
-      private_key = "${file("~/.ssh/id_rsa")}"
+      private_key = "${file("")}"
     }
 
     inline = [
