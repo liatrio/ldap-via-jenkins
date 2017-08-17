@@ -19,6 +19,14 @@ provider "aws" {
   region = "us-west-2"
 }
 
+variable "ldop_username" {
+  description = "The initial admin username for LDOP's single sign on via LDAP."
+}
+
+variable "ldop_password" {
+  description = "The initial password for the admin user. Must be at least 8 characters in length and contain at least one number."
+}
+
 variable "ami_id" {
   default = "ami-6df1e514"
   description = "The AMI ID for LDOP on ec2"
@@ -108,7 +116,7 @@ resource "aws_instance" "ldop_demo_env" {
 
     inline = [
       "cd ~/ldop-docker-compose",
-      "echo 'test\n' | sudo ./ldop compose -u $LDOP_USERNAME -p $LDOP_PASSWORD init",
+      "echo 'test\n' | sudo ./ldop compose -u ${var.ldop_username} -p ${var.ldop_username} init",
     ]
   }
 }
