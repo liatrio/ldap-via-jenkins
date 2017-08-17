@@ -20,10 +20,12 @@ provider "aws" {
 }
 
 variable "ldop_username" {
+  default = "liatrio"
   description = "The initial admin username for LDOP's single sign on via LDAP."
 }
 
 variable "ldop_password" {
+  default = "example123"
   description = "The initial password for the admin user. Must be at least 8 characters in length and contain at least one number."
 }
 
