@@ -47,7 +47,7 @@ resource "aws_instance" "ldop_demo_env" {
   instance_type          = "t2.large"
   key_name               = "${aws_key_pair.demo_key.key_name}"
   ami                    = "${var.ami_id}"
-  security_groups = ["web-sg", "ssh-sg"]
+  security_groups = ["web", "https server"]
 
   tags = {
     Name = "${var.instance_name}"
