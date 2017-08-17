@@ -118,7 +118,7 @@ resource "aws_instance" "ldop_demo_env" {
 
     inline = [
       "cd ~/ldop-docker-compose",
-      "echo 'test\n' | sudo ./ldop compose -u ${var.ldop_username} -p ${var.ldop_username} init",
+      "sudo ./ldop compose -u ${var.ldop_username} -p ${var.ldop_password} init",
     ]
   }
 }
