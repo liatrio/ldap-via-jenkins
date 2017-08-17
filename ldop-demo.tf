@@ -6,17 +6,12 @@ terraform {
   }
 }
 
-data "terraform_remote_state" "network" {
-  backend = "s3"
-  config {
-    bucket = "ldop-demo-tfstates"
-    key    = "ldop-demo/demo-terraform.tfstate"
-    region = "us-west-2"
-  }
-}
-
 provider "aws" {
   region = "us-west-2"
+}
+
+variable "instance_name" {
+  description = "The name used to identify your LDOP insatnce on LDOP"
 }
 
 variable "ldop_username" {
@@ -34,28 +29,12 @@ variable "ami_id" {
   description = "The AMI ID for LDOP on ec2"
 }
 
-resource "aws_security_group" "demo_env" {
-  name = "ldop_demo_env"
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+data "terraform_remote_state" "network" {
+  backend = "s3"
+  config {
+    bucket = "ldop-demo-tfstates"
+    key    = "ldop-demo/${var.instance_name}-terraform.tfstate"
+    region = "us-west-2"
   }
 }
 
@@ -68,10 +47,10 @@ resource "aws_instance" "ldop_demo_env" {
   instance_type          = "t2.large"
   key_name               = "${aws_key_pair.demo_key.key_name}"
   ami                    = "${var.ami_id}"
-  vpc_security_group_ids = ["${aws_security_group.demo_env.id}"]
+  security_groups = ["web-sg", "ssh-sg"]
 
   tags = {
-    Name = "terraform-ldop-demo"
+    Name = "${var.instance_name}"
   }
 
   root_block_device {
