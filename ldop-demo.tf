@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "ldop-demo-tfstates"
-    key = "ldop-demo/demo-terraform.tfstate"
+    key = "ldop-demo/${var.instance_name}-terraform.tfstate"
     region = "us-west-2"
   }
 }
