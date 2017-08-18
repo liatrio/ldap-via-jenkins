@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "ldop-demo-tfstates"
-    key = "ldop-demo/${var.instance_name}-terraform.tfstate"
+    key = "ldop-demo/demo-terraform.tfstate"
     region = "us-west-2"
   }
 }
@@ -35,6 +35,7 @@ data "terraform_remote_state" "network" {
     bucket = "ldop-demo-tfstates"
     key    = "ldop-demo/${var.instance_name}-terraform.tfstate"
     region = "us-west-2"
+    workspace_key_prefix = "${var.instance_name}"
   }
 }
 
