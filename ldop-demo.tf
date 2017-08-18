@@ -38,14 +38,9 @@ data "terraform_remote_state" "network" {
   }
 }
 
-resource "aws_key_pair" "demo_key" {
-  key_name = "terraform-ldop-demo"
-  public_key = "${file("~/.ssh/id_rsa.pub")}"
-}
-
 resource "aws_instance" "ldop_demo_env" {
   instance_type          = "t2.large"
-  key_name               = "${aws_key_pair.demo_key.key_name}"
+  key_name               = "terraform-ldop-demo"
   ami                    = "${var.ami_id}"
   security_groups = ["web", "https server"]
 
