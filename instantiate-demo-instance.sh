@@ -1,5 +1,4 @@
 #!/bin/bash
-
 workspace=$(dirname 0)
 
 # initialize the workspace

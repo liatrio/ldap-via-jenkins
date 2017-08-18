@@ -11,7 +11,7 @@ provider "aws" {
 }
 
 variable "instance_name" {
-  description = "The name used to identify your LDOP insatnce on LDOP"
+  description = "The name used to identify your LDOP instance on LDOP"
 }
 
 variable "ldop_username" {
@@ -33,9 +33,8 @@ data "terraform_remote_state" "network" {
   backend = "s3"
   config {
     bucket = "ldop-demo-tfstates"
-    key    = "ldop-demo/${var.instance_name}-terraform.tfstate"
+    key    = "ldop-demo/${terraform.workspace}/${var.instance_name}-terraform.tfstate"
     region = "us-west-2"
-    workspace_key_prefix = "${var.instance_name}"
   }
 }
 
