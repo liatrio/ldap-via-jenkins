@@ -9,6 +9,6 @@ export TF_WORKSPACE=$TF_VAR_instance_name
 # destroy the insatance and it's resources
 terraform destroy -force
 
-terraform workspace delete $TF_WORKSPACE -force | echo 'done'
+terraform workspace delete -force $TF_WORKSPACE | echo 'done'
 
 exit $EXIT_STATUS
