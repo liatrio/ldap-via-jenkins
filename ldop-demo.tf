@@ -99,3 +99,16 @@ resource "aws_instance" "ldop_demo_env" {
     ]
   }
 }
+
+data "aws_route53_zone" "liatrio" {
+  name = "liatr.io"
+}
+
+resource "aws_route53_record" "url" {
+  zone_id = "${data.aws_route53_zone.liatrio.zone_id}"
+  name    = "${var.instance_name}.liatr.io"
+  type    = "A"
+  ttl     = 300
+  records = ["${aws_instance.ldop_demo_env.public_ip}"]
+}
+
