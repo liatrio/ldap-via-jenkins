@@ -106,7 +106,7 @@ data "aws_route53_zone" "liatrio" {
 
 resource "aws_route53_record" "url" {
   zone_id = "${data.aws_route53_zone.liatrio.zone_id}"
-  name    = "dev.${var.instance_name}.liatr.io"
+  name    = "${var.instance_name}.liatr.io"
   type    = "A"
   ttl     = 300
   records = ["${aws_instance.ldop_demo_env.public_ip}"]
