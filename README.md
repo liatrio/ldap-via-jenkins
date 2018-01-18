@@ -1,2 +1,2 @@
-# ldap-via-jenkins
+# ldop-via-jenkins
 Jenkins job and resources for deployment on LDOP
